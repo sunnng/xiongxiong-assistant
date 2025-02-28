@@ -27,7 +27,7 @@ const emailSchema = z
   .email("无效的邮箱格式")
   .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "包含无效字符");
 
-export const SignUpSchema = z.object({
+export const signUpSchema = z.object({
   name: z
     .string()
     .min(1, "用户名不能为空")
@@ -60,7 +60,7 @@ export const SignUpSchema = z.object({
     }),
 });
 
-export const SignInSchema = z.object({
+export const signInSchema = z.object({
   email: emailSchema,
   password: z.string().min(1, "密码不能为空").max(64, "密码过长"), // 可选：防止超长输入攻击
 });

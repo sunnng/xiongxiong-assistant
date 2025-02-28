@@ -22,11 +22,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SignUpSchema } from "@/features/auth/schemas";
+import { signUpSchema } from "@/features/auth/schemas";
+import { useRegister } from "@/features/auth/api/use-register";
 
-const formSchema = SignUpSchema;
+const formSchema = signUpSchema;
 
 export const SignUpForm = () => {
+  const { mutate, isPending } = useRegister();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,7 +40,7 @@ export const SignUpForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    mutate({ json: values });
   }
 
   return (
@@ -98,7 +101,12 @@ export const SignUpForm = () => {
                 )}
               />
 
-              <Button type="submit" size={"lg"} className="w-full font-bold">
+              <Button
+                type="submit"
+                size={"lg"}
+                className="w-full font-bold"
+                disabled={isPending}
+              >
                 注册
               </Button>
             </div>

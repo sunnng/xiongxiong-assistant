@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SignInSchema } from "@/features/auth/schemas";
+import { signInSchema } from "@/features/auth/schemas";
 
-const formSchema = SignInSchema;
+const formSchema = signInSchema;
 
 export const SignInForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
