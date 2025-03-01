@@ -33,9 +33,15 @@ export const signUpSchema = z.object({
     .min(1, "用户名不能为空")
     .min(3, "用户名至少3个字符")
     .max(20, "用户名最长20个字符")
-    .regex(/^[a-zA-Z0-9_\-\.]+$/, "仅允许字母、数字、下划线和连字符") // 禁止特殊符号
-    .regex(/^\S*$/, "不能包含空格") // 禁止空格
-    .transform((str) => str.trim()), // 自动去除首尾空格
+    // 允许中文、字母、数字及常用符号（新增中文支持）
+    .regex(/^[\p{L}0-9_\-\.]+$/u, "允许中文、字母、数字、_、-、.")
+    // 更精确的空格检测（包括全角空格）
+    .regex(/^[^\s　]*$/, "不能包含任何空格")
+    .transform((str) => str.trim())
+    // 禁止纯数字用户名（新增防御规则）
+    .refine((val) => !/^\d+$/.test(val), {
+      message: "不能使用纯数字作为用户名",
+    }),
 
   email: emailSchema,
 
@@ -66,4 +72,4 @@ export const signInSchema = z.object({
 });
 
 // 类型推导
-export type SignInFormData = z.infer<typeof SignInSchema>;
+export type SignInFormData = z.infer<typeof signInSchema>;
