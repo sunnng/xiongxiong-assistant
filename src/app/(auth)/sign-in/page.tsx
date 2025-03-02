@@ -1,6 +1,12 @@
-import { SignInForm } from "./components/sign-in-form";
+import { getLoggedInUser } from "@/lib/appwrite";
 
-export default function SignInPage() {
+import { SignInForm } from "./components/sign-in-form";
+import { redirect } from "next/navigation";
+
+export default async function SignInPage() {
+  const user = await getLoggedInUser();
+  if (user) redirect("/");
+
   return (
     <div className="">
       <SignInForm />

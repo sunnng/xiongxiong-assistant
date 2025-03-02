@@ -23,10 +23,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInSchema } from "@/features/auth/schemas";
+import { useLogin } from "@/features/auth/api/use-login";
 
 const formSchema = signInSchema;
 
 export const SignInForm = () => {
+  const { mutate, isPending } = useLogin();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,7 +39,7 @@ export const SignInForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    mutate({ json: values });
   }
 
   return (
@@ -82,7 +85,12 @@ export const SignInForm = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" size={"lg"} className="w-full font-bold">
+                <Button
+                  type="submit"
+                  size={"lg"}
+                  className="w-full font-bold"
+                  disabled={isPending}
+                >
                   登录
                 </Button>
               </div>
