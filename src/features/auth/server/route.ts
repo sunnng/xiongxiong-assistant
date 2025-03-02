@@ -1,13 +1,10 @@
 import { Hono } from "hono";
+import { ID } from "node-appwrite";
 import { setCookie } from "hono/cookie";
-import { AppwriteException, ID } from "node-appwrite";
-import {
-  ClientErrorStatusCode,
-  ServerErrorStatusCode,
-} from "hono/utils/http-status";
 
-import { AUTH_COOKIE, createAdminClient } from "@/lib/appwrite";
 import { zValidator } from "@/lib/validator-wrapper";
+import { handleAppwriteError } from "@/lib/error-handle";
+import { AUTH_COOKIE, createAdminClient } from "@/lib/appwrite";
 
 import { signUpSchema } from "../schemas";
 
@@ -37,23 +34,27 @@ const app = new Hono().post(
         message: "注册成功！",
       });
     } catch (e) {
-      if (e instanceof AppwriteException) {
+      const { isHandled, userMessage, errorCode } = handleAppwriteError(e, {
+        logDetails: true,
+      });
+
+      if (isHandled === true) {
         return c.json(
           {
             success: false,
-            message: e.message,
+            message: userMessage,
           },
-          e.code as ClientErrorStatusCode | ServerErrorStatusCode
-        );
-      } else {
-        return c.json(
-          {
-            success: false,
-            message: (e as Error).message,
-          },
-          401
+          errorCode
         );
       }
+
+      return c.json(
+        {
+          success: false,
+          message: userMessage,
+        },
+        500
+      );
     }
   }
 );
