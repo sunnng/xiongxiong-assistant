@@ -50,7 +50,7 @@ function Toast(props: ToastProps) {
   return (
     <div
       className={cn(
-        "flex w-full md:max-w-[420px] items-center p-6 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5"
+        "flex w-full md:max-w-[420px] md:w-[356px] items-center p-6 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5"
       )}
     >
       <div className="flex flex-1 items-center">
@@ -80,7 +80,7 @@ function ToastError(props: ToastStatusProps) {
   const { description, id } = props;
 
   return (
-    <div className="relative flex w-full md:max-w-[420px] items-center gap-4 py-6 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
+    <div className="relative flex w-full md:w-[356px] items-center gap-4 py-4 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
       <button
         className="absolute right-2 top-2 rounded-md p-1 text-text opacity-0 transition-opacity group-hover:opacity-100"
         onClick={() => {
@@ -105,7 +105,7 @@ function ToastSuccess(props: ToastStatusProps) {
   const { description, id } = props;
 
   return (
-    <div className="relative flex w-full md:max-w-[420px] items-center gap-4 py-6 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
+    <div className="relative flex w-full md:w-[356px] items-center gap-4 py-4 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
       <button
         className="absolute right-2 top-2 rounded-md p-1 text-text opacity-0 transition-opacity group-hover:opacity-100"
         onClick={() => {

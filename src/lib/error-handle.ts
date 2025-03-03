@@ -125,7 +125,7 @@ export const handleAppwriteError = (
   errorCode?: ClientErrorStatusCode | ServerErrorStatusCode;
 } => {
   let isHandled = false;
-  let userMessage = "操作失败，请稍后重试";
+  const userMessage = "操作失败，请稍后重试";
   let errorCode: ClientErrorStatusCode | ServerErrorStatusCode | undefined;
 
   // 1. 处理官方AppwriteException
