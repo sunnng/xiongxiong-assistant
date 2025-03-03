@@ -6,14 +6,9 @@ import { QueryProvider } from "@/components/query-provider";
 
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+const mySans = localFont({
+  src: "./fonts/AlimamaFangYuanTiVF-Thin.woff2",
+  variable: "--my-font",
   weight: "100 900",
 });
 
@@ -29,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-cn">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${mySans.variable} antialiased`}>
         <Toaster />
         <QueryProvider>{children}</QueryProvider>
       </body>

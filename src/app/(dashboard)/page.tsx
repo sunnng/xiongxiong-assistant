@@ -5,5 +5,5 @@ export default async function Home() {
   const user = await getLoggedInUser();
   if (!user) redirect("/sign-in");
 
-  return <div className="">HOME</div>;
+  return <div className="">主页</div>;
 }
