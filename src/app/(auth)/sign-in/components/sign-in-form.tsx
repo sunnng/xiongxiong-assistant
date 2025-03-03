@@ -89,7 +89,7 @@ export const SignInForm = () => {
                   type="submit"
                   size={"lg"}
                   className="w-full font-bold"
-                  disabled={isPending}
+                  isLoading={isPending}
                 >
                   登录
                 </Button>

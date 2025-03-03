@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sidebar";
 import { NavUser } from "./nav-user";
 import Link from "next/link";
+import { getLoggedInUser } from "@/lib/appwrite";
+import { redirect } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -51,15 +53,15 @@ const items = [
   },
 ];
 
-const user = {
-  name: "shadcn",
-  email: "m@example.com",
-  avatar: "/avatars/shadcn.jpg",
-};
-export function AppSidebar() {
+export async function AppSidebar() {
+  const user = await getLoggedInUser();
+  if (!user) redirect("/sign-in");
+
+  const { name, email } = user;
+
   return (
     <Sidebar>
-      <SidebarHeader className="px-4 pt-4">
+      <SidebarHeader className="px-6 pt-4">
         <Link href="#" className="flex items-center gap-2 h-11">
           <div className="flex aspect-square size-8 items-center justify-center  bg-black text-main border-2">
             <PawPrint />
@@ -71,13 +73,13 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup className="pt-1">
+        <SidebarGroup className="pt-1 px-4">
           <SidebarGroupLabel>公会讨伐战</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="h-9 font-semibold">
+                  <SidebarMenuButton asChild className="font-semibold">
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -90,7 +92,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t-2">
-        <NavUser user={user} />
+        <NavUser user={{ name, email }} />
       </SidebarFooter>
     </Sidebar>
   );

@@ -42,7 +42,8 @@ export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
     return await account.get();
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     return null;
   }
 }

@@ -1,10 +1,11 @@
 import { Hono } from "hono";
 import { ID } from "node-appwrite";
-import { setCookie } from "hono/cookie";
+import { setCookie, deleteCookie } from "hono/cookie";
 
 import { zValidator } from "@/lib/validator-wrapper";
 import { handleAppwriteError } from "@/lib/error-handle";
 import { AUTH_COOKIE, createAdminClient } from "@/lib/appwrite";
+import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { signUpSchema, signInSchema } from "../schemas";
 
@@ -78,6 +79,14 @@ const app = new Hono()
         isHandled === true ? errorCode : 500
       );
     }
+  })
+  .post("logout", sessionMiddleware, async (c) => {
+    const account = c.get("account");
+
+    deleteCookie(c, AUTH_COOKIE);
+    await account.deleteSession("current");
+
+    return c.json({ success: true, message: "退出登录成功！" });
   });
 
 export default app;

@@ -105,7 +105,7 @@ export const SignUpForm = () => {
                 type="submit"
                 size={"lg"}
                 className="w-full font-bold"
-                disabled={isPending}
+                isLoading={isPending}
               >
                 注册
               </Button>
