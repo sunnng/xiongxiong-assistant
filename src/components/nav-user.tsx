@@ -8,7 +8,6 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
-import { revalidatePath } from "next/cache";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -28,21 +27,22 @@ import {
 } from "@/components/ui/sidebar";
 import { getFirstValidChar } from "@/lib/utils";
 import { useLogout } from "@/features/auth/api/use-logout";
+import { useCurrent } from "@/features/auth/api/use-current";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-  };
-}) {
+import { Skeleton } from "./ui/skeleton";
+
+export function NavUser() {
   const { isMobile } = useSidebar();
-  const { mutate } = useLogout();
+  const { mutate: logout } = useLogout();
+  const { data: user, isLoading } = useCurrent();
 
-  const handleLogout = () => {
-    mutate();
-  };
+  if (isLoading) {
+    return <Skeleton className="h-12" />;
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <SidebarMenu>
@@ -107,7 +107,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem onClick={() => logout}>
               <LogOut />
               退出登录
             </DropdownMenuItem>

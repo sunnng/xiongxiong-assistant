@@ -87,6 +87,11 @@ const app = new Hono()
     await account.deleteSession("current");
 
     return c.json({ success: true, message: "退出登录成功！" });
+  })
+  .get("/current", sessionMiddleware, async (c) => {
+    const user = c.get("user");
+
+    return c.json({ success: true, data: user });
   });
 
 export default app;

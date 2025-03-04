@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calendar,
   Home,
@@ -6,6 +8,8 @@ import {
   Search,
   Settings,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   Sidebar,
@@ -20,44 +24,38 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./nav-user";
-import Link from "next/link";
-import { getLoggedInUser } from "@/lib/appwrite";
-import { redirect } from "next/navigation";
 
 // Menu items.
 const items = [
   {
     title: "首页",
-    url: "#",
+    url: "/guild",
     icon: Home,
   },
   {
     title: "赛季讨伐记录",
-    url: "#",
+    url: "/guild/battle",
     icon: Inbox,
   },
   {
     title: "公会扭蛋",
-    url: "#",
+    url: "/guild/gacha",
     icon: Calendar,
   },
   {
     title: "公会捐献排行",
-    url: "#",
+    url: "/donation",
     icon: Search,
   },
   {
     title: "设置",
-    url: "#",
+    url: "/setting",
     icon: Settings,
   },
 ];
 
-export async function AppSidebar() {
-  const user = await getLoggedInUser();
-  if (!user) redirect("/sign-in");
-
-  const { name, email } = user;
+export function AppSidebar() {
+  const pathname = usePathname();
 
   return (
     <Sidebar>
@@ -79,11 +77,11 @@ export async function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="font-semibold">
-                    <a href={item.url}>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -92,7 +90,7 @@ export async function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t-2">
-        <NavUser user={{ name, email }} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
