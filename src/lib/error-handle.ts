@@ -148,7 +148,7 @@ export const handleAppwriteError = (
       ...options.customMessages,
     };
 
-    let userMessage = messages[error.type] || messages.default;
+    const userMessage = messages[error.type] || messages.default;
 
     return { isHandled, userMessage, errorCode };
   }
