@@ -48,6 +48,7 @@ const normalizePath = (rawPath: string): string => {
     const pattern = routeConfig[key]?.dynamicPattern;
     return pattern?.test(rawPath);
   });
+
   return dynamicRoute || rawPath;
 };
 

@@ -35,8 +35,7 @@ export function isAppwriteException(
     // 可选：验证 Error 特征属性
     ("stack" in error ? typeof error.stack === "string" : true) &&
     // 可选：验证构造函数特征（防御篡改）
-    (error.constructor.name === "AppwriteException" ||
-      error.constructor === AppwriteException)
+    (error.constructor.name === "AppwriteException" || error.constructor === AppwriteException)
   );
 }
 

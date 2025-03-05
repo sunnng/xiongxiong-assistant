@@ -88,7 +88,7 @@ const app = new Hono()
 
     return c.json({ success: true, message: "退出登录成功！" });
   })
-  .get("/current", sessionMiddleware, async (c) => {
+  .get("current", sessionMiddleware, async (c) => {
     const user = c.get("user");
 
     return c.json({ success: true, data: user });
