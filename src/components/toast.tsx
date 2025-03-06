@@ -1,56 +1,56 @@
-"use client";
+'use client'
 
-import React from "react";
-import { toast as sonnerToast } from "sonner";
-import { CircleAlert, CircleCheck, X } from "lucide-react";
+import { cn } from '@/lib/utils'
+import { CircleAlert, CircleCheck, X } from 'lucide-react'
+import React from 'react'
 
-import { cn } from "@/lib/utils";
+import { toast as sonnerToast } from 'sonner'
 
 interface ToastProps {
-  id: string | number;
-  title: string;
-  description: string;
+  id: string | number
+  title: string
+  description: string
   button: {
-    label: string;
-    onClick: () => void;
-  };
+    label: string
+    onClick: () => void
+  }
 }
 
 interface ToastStatusProps {
-  id: string | number;
-  description: string;
+  id: string | number
+  description: string
 }
 
-export function toast(options: Omit<ToastProps, "id">) {
-  return sonnerToast.custom((id) => (
+export function toast(options: Omit<ToastProps, 'id'>) {
+  return sonnerToast.custom(id => (
     <Toast
       id={id}
       title={options.title}
       description={options.description}
       button={options.button}
     />
-  ));
+  ))
 }
 
-export const toastError = (message: string) => {
-  return sonnerToast.custom((id) => (
+export function toastError(message: string) {
+  return sonnerToast.custom(id => (
     <ToastError id={id} description={message} />
-  ));
-};
+  ))
+}
 
-export const toastSuccess = (message: string) => {
-  return sonnerToast.custom((id) => (
+export function toastSuccess(message: string) {
+  return sonnerToast.custom(id => (
     <ToastSuccess id={id} description={message} />
-  ));
-};
+  ))
+}
 
 function Toast(props: ToastProps) {
-  const { title, description, button, id } = props;
+  const { title, description, button, id } = props
 
   return (
     <div
       className={cn(
-        "flex w-full md:max-w-[420px] md:w-[356px] items-center p-6 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5"
+        'flex w-full md:max-w-[420px] md:w-[356px] items-center p-6 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5',
       )}
     >
       <div className="flex flex-1 items-center">
@@ -63,8 +63,8 @@ function Toast(props: ToastProps) {
         <button
           className="inline-flex h-8 shrink-0 items-center justify-center rounded-base border-2 border-border dark:border-darkBorder bg-white px-3 text-sm font-base text-text ring-offset-white transition-colors disabled:pointer-events-none disabled:opacity-50"
           onClick={() => {
-            button.onClick();
-            sonnerToast.dismiss(id);
+            button.onClick()
+            sonnerToast.dismiss(id)
           }}
         >
           {button.label}
@@ -73,18 +73,18 @@ function Toast(props: ToastProps) {
 
       <div className=""></div>
     </div>
-  );
+  )
 }
 
 function ToastError(props: ToastStatusProps) {
-  const { description, id } = props;
+  const { description, id } = props
 
   return (
     <div className="relative flex w-full md:w-[356px] items-center gap-4 py-4 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
       <button
         className="absolute right-2 top-2 rounded-md p-1 text-text opacity-0 transition-opacity group-hover:opacity-100"
         onClick={() => {
-          sonnerToast.dismiss(id);
+          sonnerToast.dismiss(id)
         }}
       >
         <X className="h-4 w-4" />
@@ -98,18 +98,18 @@ function ToastError(props: ToastStatusProps) {
         <CircleAlert />
       </div>
     </div>
-  );
+  )
 }
 
 function ToastSuccess(props: ToastStatusProps) {
-  const { description, id } = props;
+  const { description, id } = props
 
   return (
     <div className="relative flex w-full md:w-[356px] items-center gap-4 py-4 pl-6 pr-8 rounded-base shadow-shadow border-2 border-border bg-main text-mtext font-base ring-1 ring-black/5">
       <button
         className="absolute right-2 top-2 rounded-md p-1 text-text opacity-0 transition-opacity group-hover:opacity-100"
         onClick={() => {
-          sonnerToast.dismiss(id);
+          sonnerToast.dismiss(id)
         }}
       >
         <X className="h-4 w-4" />
@@ -123,5 +123,5 @@ function ToastSuccess(props: ToastStatusProps) {
         <CircleCheck />
       </div>
     </div>
-  );
+  )
 }

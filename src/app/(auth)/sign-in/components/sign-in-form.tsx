@@ -1,10 +1,14 @@
-"use client";
+'use client'
 
-import { z } from "zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import type { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -12,34 +16,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { signInSchema } from "@/features/auth/schemas";
-import { useLogin } from "@/features/auth/api/use-login";
+} from '@/components/ui/form'
 
-const formSchema = signInSchema;
+import { Input } from '@/components/ui/input'
+import { useLogin } from '@/features/auth/api/use-login'
+import { signInSchema } from '@/features/auth/schemas'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { useForm } from 'react-hook-form'
 
-export const SignInForm = () => {
-  const { mutate, isPending } = useLogin();
+const formSchema = signInSchema
+
+export function SignInForm() {
+  const { mutate, isPending } = useLogin()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    mutate({ json: values });
+    mutate({ json: values })
   }
 
   return (
@@ -87,7 +87,7 @@ export const SignInForm = () => {
                 />
                 <Button
                   type="submit"
-                  size={"lg"}
+                  size="lg"
                   className="w-full font-bold"
                   isLoading={isPending}
                 >
@@ -105,7 +105,7 @@ export const SignInForm = () => {
                 <div className="flex flex-col gap-4">
                   <Button
                     className="w-full font-bold"
-                    size={"lg"}
+                    size="lg"
                     disabled={true}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -120,7 +120,8 @@ export const SignInForm = () => {
               </div>
 
               <div className="text-center text-sm">
-                还没有账号?{" "}
+                还没有账号?
+                {' '}
                 <Link href="/sign-up" className="underline underline-offset-4">
                   点击注册
                 </Link>
@@ -130,5 +131,5 @@ export const SignInForm = () => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}

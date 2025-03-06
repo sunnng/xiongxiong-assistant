@@ -1,10 +1,10 @@
+import { AppSidebar } from '@/components/app-sidebar'
+import { DynamicBreadcrumbs } from '@/components/dynamic-breadcrumbs'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { DynamicBreadcrumbs } from "@/components/dynamic-breadcrumbs";
+} from '@/components/ui/sidebar'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,5 +20,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </main>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }

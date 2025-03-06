@@ -1,15 +1,7 @@
-"use client";
+'use client'
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,30 +10,38 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import { getFirstValidChar } from "@/lib/utils";
-import { useLogout } from "@/features/auth/api/use-logout";
-import { useCurrent } from "@/features/auth/api/use-current";
+} from '@/components/ui/sidebar'
+import { useCurrent } from '@/features/auth/api/use-current'
+import { useLogout } from '@/features/auth/api/use-logout'
+import { getFirstValidChar } from '@/lib/utils'
+import {
+  BadgeCheck,
+  Bell,
+  ChevronsUpDown,
+  CreditCard,
+  LogOut,
+  Sparkles,
+} from 'lucide-react'
 
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from './ui/skeleton'
 
 export function NavUser() {
-  const { isMobile } = useSidebar();
-  const { mutate: logout } = useLogout();
-  const { data: user, isLoading } = useCurrent();
+  const { isMobile } = useSidebar()
+  const { mutate: logout } = useLogout()
+  const { data: user, isLoading } = useCurrent()
 
   if (isLoading) {
-    return <Skeleton className="h-12" />;
+    return <Skeleton className="h-12" />
   }
 
   if (!user) {
-    return null;
+    return null
   }
 
   return (
@@ -67,7 +67,7 @@ export function NavUser() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile ? 'bottom' : 'right'}
             align="end"
             sideOffset={4}
           >
@@ -115,5 +115,5 @@ export function NavUser() {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }

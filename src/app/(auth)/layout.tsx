@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function AuthLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-bg p-6 md:p-10">
@@ -14,14 +14,14 @@ export default function AuthLayout({
           className="flex items-center gap-2 self-center font-medium"
         >
           <Image
-            src={"/icons_sticker_smile.svg"}
+            src="/icons_sticker_smile.svg"
             width={52}
             height={52}
-            alt={"logo"}
+            alt="logo"
           />
         </Link>
         {children}
       </div>
     </div>
-  );
+  )
 }

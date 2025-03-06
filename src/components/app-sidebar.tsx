@@ -1,15 +1,4 @@
-"use client";
-
-import {
-  Calendar,
-  Home,
-  Inbox,
-  PawPrint,
-  Search,
-  Settings,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+'use client'
 
 import {
   Sidebar,
@@ -22,40 +11,51 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { NavUser } from "./nav-user";
+} from '@/components/ui/sidebar'
+import {
+  Calendar,
+  Home,
+  Inbox,
+  PawPrint,
+  Search,
+  Settings,
+} from 'lucide-react'
+import Link from 'next/link'
+
+import { usePathname } from 'next/navigation'
+import { NavUser } from './nav-user'
 
 // Menu items.
 const items = [
   {
-    title: "首页",
-    url: "/guild",
+    title: '首页',
+    url: '/guild',
     icon: Home,
   },
   {
-    title: "赛季讨伐记录",
-    url: "/guild/battle",
+    title: '赛季讨伐记录',
+    url: '/guild/battle',
     icon: Inbox,
   },
   {
-    title: "公会扭蛋",
-    url: "/guild/gacha",
+    title: '公会扭蛋',
+    url: '/guild/gacha',
     icon: Calendar,
   },
   {
-    title: "公会捐献排行",
-    url: "/donation",
+    title: '公会捐献排行',
+    url: '/donation',
     icon: Search,
   },
   {
-    title: "设置",
-    url: "/setting",
+    title: '设置',
+    url: '/setting',
     icon: Settings,
   },
-];
+]
 
 export function AppSidebar() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <Sidebar>
@@ -75,7 +75,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>公会讨伐战</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {items.map(item => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>
@@ -93,5 +93,5 @@ export function AppSidebar() {
         <NavUser />
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }
