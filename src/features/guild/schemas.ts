@@ -1,3 +1,4 @@
+import type { Models } from 'node-appwrite'
 import { z } from 'zod'
 
 // 假设的 Boss 类型枚举（根据实际值修改）
@@ -45,7 +46,7 @@ export const GuildBattleSchema = z.object({
     .max(100, '最多记录100名成员'),
 })
 
-export const BattleRecordsSchema = z.object({
+export const GuildBattleRecordSchema = z.object({
   // 公会名称
   guildName: z.string().min(1).max(50),
   // 赛季名称
@@ -78,3 +79,5 @@ export const BattleRecordsSchema = z.object({
   // 参与时间（ISO 8601 格式）
   joinTime: z.string().datetime({ message: '必须为有效的ISO 8601时间格式' }),
 })
+
+export type GuildBattleRecord = Models.Document & z.infer<typeof GuildBattleRecordSchema>

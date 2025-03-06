@@ -1,5 +1,11 @@
+import { GuildBattleRecordsCard } from './components/guild-battle-records-card'
+
 function GuildBattlePage() {
-  return <div>公会讨伐战页面</div>
+  return (
+    <div className="container mx-auto">
+      <GuildBattleRecordsCard />
+    </div>
+  )
 }
 
 export default GuildBattlePage

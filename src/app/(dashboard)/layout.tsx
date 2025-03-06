@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <SidebarTrigger className="-ml-1" />
           <DynamicBreadcrumbs />
         </header>
-        <main className=" w-full p-4 min-h-[100vh] flex-1 rounded-xl md:min-h-min">
+        <main className="w-full p-4 min-h-[100vh] flex-1 rounded-xl md:min-h-min">
           {children}
         </main>
       </SidebarInset>

@@ -1,7 +1,8 @@
+import type { GuildBattleRecord } from '../schemas'
 import { DATABASE_ID, GUILDBATTLE_ID } from '@/config'
 import { sessionMiddleware } from '@/lib/session-middleware'
-import { zValidator } from '@/lib/validator-wrapper'
 
+import { zValidator } from '@/lib/validator-wrapper'
 import { Hono } from 'hono'
 import { Query } from 'node-appwrite'
 import { z } from 'zod'
@@ -35,7 +36,7 @@ const app = new Hono().get(
       query.push(Query.equal('username', username))
     }
 
-    const records = await databases.listDocuments(
+    const records = await databases.listDocuments<GuildBattleRecord>(
       DATABASE_ID,
       GUILDBATTLE_ID,
       query,

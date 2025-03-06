@@ -43,7 +43,7 @@ const app = new Hono()
           success: false,
           message: userMessage,
         },
-        isHandled === true ? errorCode : 500,
+        isHandled ? errorCode : 500,
       )
     }
   })
@@ -78,7 +78,7 @@ const app = new Hono()
           success: false,
           message: userMessage,
         },
-        isHandled === true ? errorCode : 500,
+        isHandled ? errorCode : 500,
       )
     }
   })
