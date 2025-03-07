@@ -10,12 +10,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="bg-bg">
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b-2 px-4">
+      <SidebarInset className="bg-white bg-[radial-gradient(#ddd_1px,transparent_1px)] bg-[length:16px_16px]">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b-2 px-4 sticky top-0 z-50 backdrop-blur-md bg-white/70 transition-all duration-300 shadow-sm">
           <SidebarTrigger className="-ml-1" />
           <DynamicBreadcrumbs />
         </header>
-        <main className="w-full p-4 min-h-[100vh] flex-1 rounded-xl md:min-h-min">
+        <main className="p-4 flex-1 overflow-auto min-h-[calc(100vh-4rem)]">
           {children}
         </main>
       </SidebarInset>

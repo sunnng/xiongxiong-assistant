@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         main: 'var(--main)',
+        second: 'var(--secondary)',
         overlay: 'var(--overlay)',
         bg: 'var(--bg)',
         bw: 'var(--bw)',

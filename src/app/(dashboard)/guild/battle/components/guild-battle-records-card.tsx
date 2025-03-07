@@ -1,9 +1,9 @@
 'use client'
 
+import { DataTable } from '@/components/data-table/data-table'
 import { useGetBattleRecords } from '@/features/guild/api/use-get-battle-records'
 
 import { columns } from '@/features/guild/components/colums'
-import { DataTable } from '@/features/guild/components/data-table'
 
 export function GuildBattleRecordsCard() {
   const { data } = useGetBattleRecords({})
